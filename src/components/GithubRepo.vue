@@ -13,6 +13,8 @@
 <script>
 
     import {debouncerdecorator} from '@/helpers/debouncer.js'
+    import {api} from '@/api/api.js'
+    // import {Octokit} from "octokit"
 
     export default {
         data: () => ({
@@ -22,17 +24,12 @@
             userloading: false
         }),
         methods: {
-           
             procuraUsuariosGithub: debouncerdecorator(function() {
-                 console.log('chamadinha no github:' + this.usersearch)
                  this.userloading = true
-                 setTimeout(() =>{
-                    this.userlist = [
-                        {login: 'joao'},
-                        {login: 'jose'}
-                    ]
-                    this.userloading =  false
-                },1000)
+                 api.search_users(this.usersearch).then(data => {
+                    this.userlist = data.items
+                    this.userloading = false
+                 })
             },500),
         },
         watch: {
