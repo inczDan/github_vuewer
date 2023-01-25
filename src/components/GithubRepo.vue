@@ -9,6 +9,7 @@
                 :loading="userloading"
                 :search-input.sync="usersearch"
                 item-text="login"
+                prepend-icon="mdi-account-search"
                 />
             </v-col>
             <v-col cols="6">
@@ -20,6 +21,7 @@
                     label="Selecione o repositorio desejado"
                     return-object
                     single-line
+                    prepend-icon="mdi-file-code-outline"
                 ></v-select>
             </v-col>
         </v-row>
@@ -41,8 +43,10 @@
             usersearch: null,
             userlist: [],
             repolist: [],
+            arquivolist: [],
             userloading: false,
             repoloading: false,
+            arquivoloading: false,
         }),
         methods: {
             procuraUsuariosGithub: debouncerdecorator(async function() {
@@ -56,7 +60,11 @@
                 const data = await api.lista_repos(this.user)
                 this.repolist = data
                 this.repoloading= false
-            }
+            },
+            async buscaInfo(){
+                const data = await api.repos(this.user)
+                this.userInfo = data
+            },
         },
         watch: {
             usersearch (){
@@ -65,11 +73,12 @@
             user(){
                 if(this.user){
                     this.listaRepositorios()
+                    this.buscaInfo()
                 }
             },
             repo (){
                 this.$emit('reposelected', this.repo)
-            }
+            },
         }
     }
 </script>
