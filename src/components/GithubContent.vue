@@ -99,20 +99,21 @@
         this.loading = false;
       },
       async back() {
-        this.loading = true;
-        this.newPath.pop();
-        let pastPath =
-          this.newPath.length == 1 ? this.newPath[0] : this.newPath[-1];
-        if (pastPath == undefined) {
-          pastPath = "";
-        }
-        this.files = await api.novoPath(
-          this.repo.owner.login,
-          this.repo.name.pastPath
-        );
-        this.currentPath = pastPath;
-        this.loading = false;
-      },
+      this.loading = true;
+      this.newPath.pop();
+      let pastPath =
+        this.newPath.length == 1 ? this.newPath[0] : this.newPath[-1];
+      if (pastPath == undefined) {
+        pastPath = "";
+      }
+      this.files = await api.paths(
+        this.repo.owner.login,
+        this.repo.name,
+        pastPath
+      );
+      this.currentPath = pastPath;
+      this.loading = false;
+    },
     },
     watch: {
       repo() {
