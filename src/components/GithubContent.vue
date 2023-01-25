@@ -82,18 +82,18 @@
       currentPath: null,
     }),
     methods: {
-      async listFiles() {
+      async listarquivo() {
         this.loading = true;
         this.files = await api.arquivos(this.repo.owner.login, this.repo.name);
         this.loading = false;
       },
       async novoPath(path) {
         this.loading = true;
-        this.files = await api.path(
-          this.repo.owner.login,
-          this.repo.name,
-          path
-        );
+      this.files = await api.paths(
+        this.repo.owner.login,
+        this.repo.name,
+        path
+      )
         this.newPath.push(path);
         this.currentPath = path;
         this.loading = false;
@@ -108,8 +108,7 @@
         }
         this.files = await api.novoPath(
           this.repo.owner.login,
-          this.repo.name,
-          pastPath
+          this.repo.name.pastPath
         );
         this.currentPath = pastPath;
         this.loading = false;
@@ -119,7 +118,7 @@
       repo() {
         this.newPath = [];
         this.currentPath = null;
-        this.listFiles();
+        this.listarquivo();
       },
       files() {},
     },

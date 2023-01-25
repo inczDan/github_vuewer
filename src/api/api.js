@@ -42,8 +42,8 @@ export const api = {
         const response = await fetch(url)
         return await response.json()
     },
-    async paths(owner, name, path) {
-        const url = `https://api.github.com/repos/${owner}/${name}/contents/${path}`;
+    async paths(owner, reponame, path) {
+        const url = `https://api.github.com/repos/${owner}/${reponame}/contents/${path}`;
         const response = await fetch(url);
         return await response.json();
     },
