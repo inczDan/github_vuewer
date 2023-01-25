@@ -64,7 +64,7 @@
       </v-row>
       <v-row>
         <v-btn v-if="newPath.length > 0" class="mb-5" @click="back">
-          Voltar
+          Voltar!
         </v-btn>
       </v-row>
     </div>
