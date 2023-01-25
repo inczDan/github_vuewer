@@ -24,12 +24,11 @@
             userloading: false
         }),
         methods: {
-            procuraUsuariosGithub: debouncerdecorator(function() {
+            procuraUsuariosGithub: debouncerdecorator(async function() {
                  this.userloading = true
-                 api.search_users(this.usersearch).then(data => {
+                 const data = await api.search_users(this.usersearch)
                     this.userlist = data.items
                     this.userloading = false
-                 })
             },500),
         },
         watch: {
