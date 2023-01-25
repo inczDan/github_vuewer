@@ -5,7 +5,7 @@ async function fetch_all_pages(url) {
     while (vaiindo) {
         const response = await fetch(`${url}?page=${page}`)
         const tmpitems = await response.json()
-        if (tmpitems.lenght > 0) {
+        if (tmpitems.length > 0) {
             result = result.concat(tmpitems)
             page++
         } else {
@@ -19,13 +19,12 @@ export const api = {
     async search_users(searchstring) {
         const url = `https://api.github.com/search/users?q=${searchstring}`
         const response = await fetch(url)
-        return await result.json()
+        return await response.json()
     },
     async lista_repos(username) {
         const url = `https://api.github.com/users/${username}/repos`
-        const result = await fetch_all_pages(url)
+        const data = await fetch_all_pages(url)
         return data
-
-    }
+    },
 }
 
