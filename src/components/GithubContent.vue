@@ -75,7 +75,9 @@
     >
       <v-card>
         <v-card-text>
-          {{ cont_arquivo }}
+          <vue-code-highlight language="javascript">
+{{cont_arquivo}}
+</vue-code-highlight>
         </v-card-text>
 
         <v-divider></v-divider>
@@ -98,8 +100,11 @@
   
   <script>
   import {api} from '@/api/api.js'
+  import { component as VueCodeHighlight } from 'vue-code-highlight';
   export default {
     name: "GithubContent",
+    components:{
+    VueCodeHighlight},
     props: ["repo"],
     data: () => ({
       dialog: false,
