@@ -35,7 +35,8 @@
                                   <v-icon>mdi-folder</v-icon> {{ content.name }}
                                 </v-btn>
                               </td>
-                              <td v-else class="text-left">
+                              <td v-else class="text-left"
+                              @click="entraArquivo(content.download_url)">
                                 <v-icon>mdi-file</v-icon> {{ content.name }}
                               </td>
                               <td class="text-left">{{ content.type }}</td>
@@ -67,6 +68,31 @@
           Voltar!
         </v-btn>
       </v-row>
+      <div class="text-center">
+    <v-dialog
+      v-model="dialog"
+      width="500"
+    >
+      <v-card>
+        <v-card-text>
+          {{ cont_arquivo }}
+        </v-card-text>
+
+        <v-divider></v-divider>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            color="primary"
+            text
+            @click="fecharquivo()"
+          >
+            Voltar!
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </div>
     </div>
   </template>
   
@@ -76,7 +102,9 @@
     name: "GithubContent",
     props: ["repo"],
     data: () => ({
+      dialog: false,
       files: [],
+      cont_arquivo: null,
       newPath: [],
       loading: false,
       currentPath: null,
@@ -86,6 +114,16 @@
         this.loading = true;
         this.files = await api.arquivos(this.repo.owner.login, this.repo.name);
         this.loading = false;
+      },
+      async fecharquivo(){
+        this.dialog  = false
+        this.cont_arquivo = ''
+      },
+      async entraArquivo(arquivo){
+        this.loading = true;
+        console.log(arquivo)
+        this.cont_arquivo = await api.conteudoArquivo(arquivo)
+        this.loading = false
       },
       async novoPath(path) {
         this.loading = true;
@@ -121,7 +159,13 @@
         this.currentPath = null;
         this.listarquivo();
       },
-      files() {},
+      files() {
+
+      },
+      cont_arquivo(){
+        if (this.cont_arquivo !=''){
+        this.dialog = true}
+      },
     },
   };
   </script>
