@@ -1,6 +1,6 @@
 # github_vuewer
 
-## Este projeto feito com Vue tem como objetivo central aproveitar a API do GitHub, permitindo uma experiencia de navegação detalhada pelos arquivos e projetos de qualquer usuario que compoe a base de dados da API. Procure pelo seu user e experimente! :octocat:
+## Este projeto feito com Vue tem como principal objetivo aproveitar a API do GitHub, permitindo uma experiencia de navegação detalhada pelos arquivos e projetos de qualquer usuario que compoe a base de dados da API. Procure pelo seu user e experimente! :octocat:
 
 https://user-images.githubusercontent.com/94784558/214694356-f8a2386a-72a7-4205-bc03-f5610e27cadd.mp4
 
